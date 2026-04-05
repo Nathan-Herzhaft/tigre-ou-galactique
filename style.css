@@ -314,6 +314,14 @@ body {
   text-shadow: 0 2px 24px rgba(0,0,0,0.8), 0 0 40px currentColor;
 }
 
+.result-score {
+  font-family: 'Boogaloo', cursive;
+  font-size: 1.3rem;
+  letter-spacing: .06em;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+}
+
 .result-desc {
   font-size: 1.05rem;
   line-height: 1.8;

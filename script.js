@@ -136,6 +136,14 @@ function getProfile(score) {
 // -------------------------------------------------------
 // RÉSULTAT
 // -------------------------------------------------------
+function scoreLabel(score, key) {
+  const MEAN = 3; // moyenne simulée arrondie
+  const relative = Math.abs(score - MEAN);
+  if (key === 'HYBRID') return `Score : ${score > 0 ? '+' : ''}${score}`;
+  const side = key === 'TIGER' ? 'points tigre 🐯' : 'points galactique 🌌';
+  return `${relative} ${side}`;
+}
+
 function showResult() {
   const score = computeScore();
   const key   = getProfile(score);
@@ -153,6 +161,11 @@ function showResult() {
   document.getElementById('resultTitle').style.color = r.color;
   document.getElementById('resultDesc').textContent  = r.desc;
 
+  // Affichage du score
+  const label = scoreLabel(score, key);
+  document.getElementById('resultScore').textContent = label;
+  document.getElementById('resultScore').style.color = r.color;
+
   // Fond pleine page
   document.body.classList.remove('bg-tiger', 'bg-galaxy', 'bg-hybrid');
   document.body.classList.add(r.bg);
@@ -161,6 +174,7 @@ function showResult() {
   btnShare.style.borderColor = r.color;
   btnShare.style.color       = r.color;
   btnShare.dataset.key       = key;
+  btnShare.dataset.label     = label;
 }
 
 // -------------------------------------------------------
@@ -168,10 +182,11 @@ function showResult() {
 // -------------------------------------------------------
 async function shareResult() {
   const key      = btnShare.dataset.key;
+  const label    = btnShare.dataset.label;
   const r        = results[key];
   const shareUrl = window.location.href.split('?')[0];
 
-  const text = `${r.emoji} Je suis "${r.title}" !\nFais le quiz : ${shareUrl}`;
+  const text = `${r.emoji} Je suis "${r.title}" avec ${label} !\nFais le quiz : ${shareUrl}`;
 
   if (navigator.share) {
     try {
