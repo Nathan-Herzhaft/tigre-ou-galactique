@@ -1,118 +1,38 @@
-// -------------------------------------------------------
-// 📝 QUESTIONS — modifie ici !
-// Chaque option a une valeur (A, B ou C) qui détermine le profil final.
-// -------------------------------------------------------
-const questions = [
-  {
-    text: "C'est samedi matin, tu fais quoi ?",
-    options: [
-      { label: "Grasse mat' jusqu'à midi, évidemment 😴", value: "A" },
-      { label: "Déjà dehors pour une balade ou du sport 🏃", value: "B" },
-      { label: "Un projet créa ou lecture tranquille ☕", value: "C" },
-    ]
-  },
-  {
-    text: "En soirée, tu es plutôt…",
-    options: [
-      { label: "Celui/celle qui danse toute la nuit 🕺", value: "B" },
-      { label: "Dans un coin à parler avec 2-3 personnes 🗣️", value: "C" },
-      { label: "Rentré·e à minuit, le lit m'appelle 🛌", value: "A" },
-    ]
-  },
-  {
-    text: "Ton repas idéal ?",
-    options: [
-      { label: "Un bon plat fait maison, en prenant le temps 🍝", value: "C" },
-      { label: "Un kebab entre amis à 2h du mat' 🌯", value: "B" },
-      { label: "N'importe quoi du moment que c'est rapide 😅", value: "A" },
-    ]
-  },
-  {
-    text: "Un truc se casse chez toi. Tu…",
-    options: [
-      { label: "Tu cherches un tuto YouTube et tu répares 🔧", value: "C" },
-      { label: "Tu demandes à quelqu'un de le faire à ta place 😇", value: "A" },
-      { label: "Tu improvises jusqu'à ce que ça marche (ou pas) 🤞", value: "B" },
-    ]
-  },
-  {
-    text: "Quelle phrase te ressemble le plus ?",
-    options: [
-      { label: "\"Je verrai ça demain\" 😌", value: "A" },
-      { label: "\"Carpe diem, on y va !\" ⚡", value: "B" },
-      { label: "\"Laisse-moi d'abord faire une liste\" 📋", value: "C" },
-    ]
-  },
-  {
-    text: "Tu reçois un message inattendu d'un inconnu. Tu…",
-    options: [
-      { label: "Réponds avec enthousiasme, nouvelle aventure ! 🎉", value: "B" },
-      { label: "Lis, marques comme non lu, réponds dans 3 jours 👀", value: "A" },
-      { label: "Analyses le message avant de répondre prudemment 🧐", value: "C" },
-    ]
-  },
-  {
-    text: "Ton superpouvoir idéal ?",
-    options: [
-      { label: "Téléportation — bye bye les transports 🚀", value: "B" },
-      { label: "Lire dans les pensées 🧠", value: "C" },
-      { label: "Ne jamais avoir besoin de dormir... ou l'inverse 😴", value: "A" },
-    ]
-  },
-];
+// =====================================================
+// script.js — logique du quiz
+// Les données (questions, résultats, seuils) sont dans data.js
+// =====================================================
 
-// -------------------------------------------------------
-// 🏆 RÉSULTATS — modifie les titres, emojis et descriptions !
-// -------------------------------------------------------
-const results = {
-  A: {
-    emoji: "🐨",
-    title: "Le/La Cozy Bear",
-    desc: "Tu es la définition du confort. Tu sais apprécier les petits plaisirs de la vie : le plaid, la tisane, le silence. Tes amis t'adorent pour ton calme et ta zénitude. Tu n'es pas paresseux·se, tu es simplement sélectif·ve avec ton énergie. 🌟",
-    color: "#ffd93d",
-    bg: "#fff8e0",
-  },
-  B: {
-    emoji: "🦊",
-    title: "Le/La Wild Fox",
-    desc: "Tu vis à 200 à l'heure et tu adores ça. Spontané·e, curieux·se, toujours partant·e pour une nouvelle expérience. Tes amis savent que c'est toi qui amènes la bonne énergie. La routine ? Connais pas. ⚡",
-    color: "#ff6b6b",
-    bg: "#fff0f0",
-  },
-  C: {
-    emoji: "🦉",
-    title: "Le/La Wise Owl",
-    desc: "Tu observes, tu analyses, tu crées. Tu es le genre de personne qui a toujours un carnet à portée de main. Tes amis viennent te voir pour avoir de bons conseils. Tu n'es pas lent·e — tu es précis·e. 🎯",
-    color: "#4d96ff",
-    bg: "#f0f4ff",
-  },
-};
+const letters = ['A', 'B', 'C', 'D', 'E'];
 
-// -------------------------------------------------------
-// LOGIQUE
-// -------------------------------------------------------
 let currentQ = 0;
-let answers = [];
-const letters = ['A', 'B', 'C', 'D'];
+let answers  = []; // index de l'option choisie par question
 
-const introHeader     = document.getElementById('introHeader');
-const startCard       = document.getElementById('startCard');
-const progressSection = document.getElementById('progressSection');
-const questionCard    = document.getElementById('questionCard');
-const resultCard      = document.getElementById('resultCard');
-const progressBar     = document.getElementById('progressBar');
-const progressLabel   = document.getElementById('progressLabel');
-const questionNumber  = document.getElementById('questionNumber');
-const questionText    = document.getElementById('questionText');
+// --- Éléments DOM ---
+const introHeader      = document.getElementById('introHeader');
+const startCard        = document.getElementById('startCard');
+const progressSection  = document.getElementById('progressSection');
+const questionCard     = document.getElementById('questionCard');
+const resultCard       = document.getElementById('resultCard');
+const progressBar      = document.getElementById('progressBar');
+const progressLabel    = document.getElementById('progressLabel');
+const questionNumber   = document.getElementById('questionNumber');
+const questionText     = document.getElementById('questionText');
 const optionsContainer = document.getElementById('optionsContainer');
-const btnNext         = document.getElementById('btnNext');
-const btnBack         = document.getElementById('btnBack');
+const btnNext          = document.getElementById('btnNext');
+const btnBack          = document.getElementById('btnBack');
+const btnShare         = document.getElementById('btnShare');
 
+// --- Événements ---
 document.getElementById('btnStart').addEventListener('click', startQuiz);
 btnNext.addEventListener('click', nextQuestion);
 btnBack.addEventListener('click', prevQuestion);
 document.getElementById('btnRestart').addEventListener('click', restart);
+btnShare.addEventListener('click', shareResult);
 
+// -------------------------------------------------------
+// QUIZ
+// -------------------------------------------------------
 function startQuiz() {
   startCard.classList.add('hidden');
   introHeader.classList.add('hidden');
@@ -124,7 +44,7 @@ function startQuiz() {
 function renderQuestion() {
   const q = questions[currentQ];
   questionNumber.textContent = `Question ${currentQ + 1}`;
-  questionText.textContent = q.text;
+  questionText.textContent   = q.text;
 
   // Reset animation
   questionCard.style.animation = 'none';
@@ -133,23 +53,23 @@ function renderQuestion() {
   optionsContainer.innerHTML = '';
   q.options.forEach((opt, i) => {
     const btn = document.createElement('button');
-    btn.className = 'option-btn' + (answers[currentQ] === opt.value ? ' selected' : '');
+    btn.className = 'option-btn' + (answers[currentQ] === i ? ' selected' : '');
     btn.innerHTML = `<span class="option-letter">${letters[i]}</span><span>${opt.label}</span>`;
-    btn.addEventListener('click', () => selectOption(opt.value, btn));
+    btn.addEventListener('click', () => selectOption(i, btn));
     optionsContainer.appendChild(btn);
   });
 
-  btnNext.disabled = answers[currentQ] === undefined;
-  btnBack.style.visibility = currentQ === 0 ? 'hidden' : 'visible';
-  btnNext.textContent = currentQ === questions.length - 1 ? 'Voir mon résultat 🎉' : 'Suivant →';
+  btnNext.disabled           = answers[currentQ] === undefined;
+  btnBack.style.visibility   = currentQ === 0 ? 'hidden' : 'visible';
+  btnNext.textContent        = currentQ === questions.length - 1 ? 'Révéler mon âme 🔮' : 'Suivant →';
 
   const pct = (currentQ / questions.length) * 100;
-  progressBar.style.width = pct + '%';
-  progressLabel.textContent = `Question ${currentQ + 1} / ${questions.length}`;
+  progressBar.style.width    = pct + '%';
+  progressLabel.textContent  = `Question ${currentQ + 1} / ${questions.length}`;
 }
 
-function selectOption(value, btn) {
-  answers[currentQ] = value;
+function selectOption(index, btn) {
+  answers[currentQ] = index;
   document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
   btnNext.disabled = false;
@@ -168,46 +88,147 @@ function prevQuestion() {
   if (currentQ > 0) { currentQ--; renderQuestion(); }
 }
 
-// Calcul du score et affichage du résultat
+// -------------------------------------------------------
+// SCORE
+// -------------------------------------------------------
+function computeScore() {
+  return answers.reduce((total, optionIndex, questionIndex) => {
+    return total + questions[questionIndex].options[optionIndex].points;
+  }, 0);
+}
+
+function computeMaxScore() {
+  return questions.reduce((sum, q) => sum + Math.max(...q.options.map(o => o.points)), 0);
+}
+
+function getProfile(score, maxScore) {
+  const pct = maxScore === 0 ? 50 : (score / maxScore) * 100;
+  if (pct <= thresholds.low)  return 'TIGER';
+  if (pct >= thresholds.high) return 'GALAXY';
+  return 'HYBRID';
+}
+
+// -------------------------------------------------------
+// RÉSULTAT
+// -------------------------------------------------------
 function showResult() {
-  const scores = { A: 0, B: 0, C: 0 };
-  answers.forEach(a => { if (scores[a] !== undefined) scores[a]++; });
-  const winner = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
-  const r = results[winner];
+  const score    = computeScore();
+  const maxScore = computeMaxScore();
+  const key      = getProfile(score, maxScore);
+  const r        = results[key];
 
   questionCard.classList.add('hidden');
   progressSection.classList.add('hidden');
+
+  resultCard.className = 'result-card ' + r.theme;
   resultCard.classList.remove('hidden');
   progressBar.style.width = '100%';
 
   document.getElementById('resultEmoji').textContent = r.emoji;
   document.getElementById('resultTitle').textContent = r.title;
   document.getElementById('resultTitle').style.color = r.color;
-  document.getElementById('resultDesc').textContent = r.desc;
-  resultCard.style.background = r.bg;
+  document.getElementById('resultDesc').textContent  = r.desc;
 
-  // Pills de score
+  // Fond pleine page
+  document.body.classList.remove('bg-tiger', 'bg-galaxy', 'bg-hybrid');
+  document.body.classList.add(r.bg);
+
+  // Pill avec animation du score
   const pillsEl = document.getElementById('scorePills');
   pillsEl.innerHTML = '';
-  const labels = { A: '🐨 Cozy', B: '🦊 Wild', C: '🦉 Wise' };
-  const colors = { A: ['#ffd93d', '#7a5c00'], B: ['#ff6b6b', '#7a0000'], C: ['#4d96ff', '#001f7a'] };
-  Object.entries(scores).forEach(([k, v]) => {
-    const pill = document.createElement('div');
-    pill.className = 'pill';
-    pill.style.background = colors[k][0] + '33';
-    pill.style.color = colors[k][1];
-    pill.textContent = `${labels[k]}: ${v} pts`;
-    pillsEl.appendChild(pill);
-  });
+  const pill = document.createElement('div');
+  pill.className   = 'pill';
+  pill.style.color = r.color;
+  pill.textContent = `Score : 0 / ${maxScore}`;
+  pillsEl.appendChild(pill);
+  animateScore(pill, score, maxScore, r.color);
+
+  // Bouton partage
+  btnShare.style.borderColor = r.color;
+  btnShare.style.color       = r.color;
+
+  // Stocke le résultat courant pour le partage
+  btnShare.dataset.key   = key;
+  btnShare.dataset.score = score;
+  btnShare.dataset.max   = maxScore;
 }
 
+// -------------------------------------------------------
+// ANIMATION DU SCORE
+// -------------------------------------------------------
+function animateScore(pill, targetScore, maxScore, color) {
+  const duration = 1200; // ms
+  const start    = performance.now();
+
+  function step(now) {
+    const elapsed  = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // Easing ease-out
+    const eased    = 1 - Math.pow(1 - progress, 3);
+    const current  = Math.round(eased * targetScore);
+
+    pill.textContent = `Score : ${current} / ${maxScore}`;
+
+    // Couleur qui s'intensifie pendant l'animation
+    pill.style.opacity = 0.4 + eased * 0.6;
+
+    if (progress < 1) requestAnimationFrame(step);
+    else pill.style.opacity = 1;
+  }
+
+  requestAnimationFrame(step);
+}
+
+// -------------------------------------------------------
+// PARTAGE
+// -------------------------------------------------------
+async function shareResult() {
+  const key      = btnShare.dataset.key;
+  const score    = btnShare.dataset.score;
+  const max      = btnShare.dataset.max;
+  const r        = results[key];
+  const shareUrl = window.location.href.split('?')[0]; // URL propre sans paramètres
+
+  const text = `${r.emoji} Je suis "${r.title}" ! (${score}/${max} pts)\nFais le quiz : ${shareUrl}`;
+
+  // Utilise l'API Web Share si disponible (mobile), sinon copie dans le presse-papier
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: 'Tigre ou Galactique ?', text });
+    } catch {
+      // L'utilisateur a annulé — on ne fait rien
+    }
+  } else {
+    try {
+      await navigator.clipboard.writeText(text);
+      showShareFeedback('✅ Copié !');
+    } catch {
+      // Fallback si clipboard non disponible (ex: http sans https)
+      showShareFeedback('🔗 ' + shareUrl);
+    }
+  }
+}
+
+function showShareFeedback(message) {
+  const original      = btnShare.textContent;
+  btnShare.textContent = message;
+  btnShare.disabled    = true;
+  setTimeout(() => {
+    btnShare.textContent = original;
+    btnShare.disabled    = false;
+  }, 2500);
+}
+
+// -------------------------------------------------------
+// RESTART
+// -------------------------------------------------------
 function restart() {
   currentQ = 0;
-  answers = [];
-  resultCard.classList.add('hidden');
+  answers  = [];
+  resultCard.className = 'result-card hidden';
   introHeader.classList.remove('hidden');
   startCard.classList.remove('hidden');
   progressSection.classList.add('hidden');
+  document.body.classList.remove('bg-tiger', 'bg-galaxy', 'bg-hybrid');
   progressBar.style.width = '0%';
-  resultCard.style.background = '';
 }

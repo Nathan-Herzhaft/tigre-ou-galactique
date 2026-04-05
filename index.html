@@ -3,58 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quel type es-tu ? 🔥</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <title>Tigre ou Galactique ? 🐯🌌</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="wrapper">
 
-  <!-- INTRO (header) -->
-  <div class="header" id="introHeader">
-    <span class="emoji-big">🌈</span>
-    <h1>Quel type es-tu ?</h1>
-    <p>7 questions pour le savoir — honnêteté obligatoire 😄</p>
-  </div>
+  <!-- Lianes décoratives -->
+  <div class="leaf-deco tl"    aria-hidden="true">🌿</div>
+  <div class="leaf-deco tr"    aria-hidden="true">🌿</div>
+  <div class="leaf-deco bl"    aria-hidden="true">🍃</div>
+  <div class="leaf-deco br"    aria-hidden="true">🌿</div>
+  <div class="leaf-deco mid-l" aria-hidden="true">🍃</div>
+  <div class="leaf-deco mid-r" aria-hidden="true">🌿</div>
 
-  <!-- PROGRESS -->
-  <div id="progressSection" class="hidden">
-    <div class="progress-label" id="progressLabel">Question 1 / 7</div>
-    <div class="progress-bar-wrap">
-      <div class="progress-bar" id="progressBar" style="width:0%"></div>
+  <div class="wrapper">
+
+    <!-- INTRO -->
+    <div class="header" id="introHeader">
+      <span class="emoji-big">🐯🌌</span>
+      <h1>Tigre ou Galactique ?</h1>
+      <p>Quelques questions pour révéler ta vraie nature… ou pas.</p>
     </div>
-  </div>
 
-  <!-- QUESTION CARD -->
-  <div class="card hidden" id="questionCard">
-    <div class="question-number" id="questionNumber">Question 1</div>
-    <div class="question-text" id="questionText"></div>
-    <div class="options" id="optionsContainer"></div>
-    <div class="nav">
-      <button class="btn-back" id="btnBack">← Retour</button>
-      <button class="btn-next" id="btnNext" disabled>Suivant →</button>
+    <!-- PROGRESS -->
+    <div id="progressSection" class="hidden">
+      <div class="progress-label" id="progressLabel">Question 1 / 7</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" id="progressBar" style="width:0%"></div>
+      </div>
     </div>
+
+    <!-- QUESTION CARD -->
+    <div class="card hidden" id="questionCard">
+      <div class="question-number" id="questionNumber">Question 1</div>
+      <div class="question-text" id="questionText"></div>
+      <div class="options" id="optionsContainer"></div>
+      <div class="nav">
+        <button class="btn-back" id="btnBack">← Retour</button>
+        <button class="btn-next" id="btnNext" disabled>Suivant →</button>
+      </div>
+    </div>
+
+    <!-- START CARD -->
+    <div class="card" id="startCard">
+      <p>Prêt·e à découvrir si tu es une bête sauvage ou un être de l'espace ? 🌿🛸<br>Réponds honnêtement. Ou pas. On ne sait pas ce qui est pire.</p>
+      <button class="btn-next" id="btnStart" style="max-width:100%;width:100%;margin-top:22px">C'est parti ! 🔥</button>
+    </div>
+
+    <!-- RESULT -->
+    <div class="result-card hidden" id="resultCard">
+      <span class="result-emoji" id="resultEmoji"></span>
+      <div class="result-title" id="resultTitle"></div>
+      <div class="result-desc" id="resultDesc"></div>
+      <div class="score-pills" id="scorePills"></div>
+      <div class="result-actions">
+        <button class="btn-share" id="btnShare">Partager mon résultat 🔗</button>
+        <button class="btn-restart" id="btnRestart">Recommencer 🔄</button>
+      </div>
+    </div>
+
   </div>
 
-  <!-- START CARD -->
-  <div class="card" id="startCard">
-    <p style="font-size:1.1rem;font-weight:700;color:#555;margin-bottom:20px;line-height:1.6">
-      Prêt·e à découvrir ton profil ? Réponds sincèrement et on te dit tout ! 🎉
-    </p>
-    <button class="btn-next" id="btnStart" style="max-width:100%;width:100%">C'est parti ! 🚀</button>
-  </div>
-
-  <!-- RESULT -->
-  <div class="result-card hidden" id="resultCard">
-    <span class="result-emoji" id="resultEmoji"></span>
-    <div class="result-title" id="resultTitle"></div>
-    <div class="result-desc" id="resultDesc"></div>
-    <div class="score-pills" id="scorePills"></div>
-    <button class="btn-restart" id="btnRestart">Recommencer 🔄</button>
-  </div>
-
-</div>
-
-<script src="script.js"></script>
+  <!-- data.js doit être chargé AVANT script.js -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
