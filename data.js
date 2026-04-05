@@ -127,18 +127,22 @@ const questions = [
 // -------------------------------------------------------
 // SEUILS
 //
-// Le score est normalisé en % (0–100) pour être
-// indépendant du nombre de questions et de points.
+// Le score est la somme brute des points (peut être négatif).
+// Plus le score est négatif → TIGRE
+// Plus le score est positif → GALACTIQUE
 //
-//   score% <= low   → TIGRE
-//   score% >= high  → GALACTIQUE
-//   entre les deux  → HYBRIDE (tigre cosmique)
+// Exemples avec 10 questions à ±3 pts (min -30 / max +30) :
+//   score <= -8  → TIGRE
+//   score >= +8  → GALACTIQUE
+//   entre les deux → HYBRIDE
+//
+// Ajuste low et high selon la plage possible de tes questions.
 // -------------------------------------------------------
 const thresholds = {
-  low:  35, // % en dessous → Tigre
-  high: 65, // % au dessus  → Galactique
+  low:  -8, // score <= low  → Tigre
+  high:  8, // score >= high → Galactique
 };
-
+ 
 // -------------------------------------------------------
 // RÉSULTATS
 // - emoji  : affiché en grand

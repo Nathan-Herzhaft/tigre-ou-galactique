@@ -24,7 +24,35 @@ const btnBack          = document.getElementById('btnBack');
 const btnShare         = document.getElementById('btnShare');
 
 // --- Événements ---
-document.getElementById('btnStart').addEventListener('click', startQuiz);
+const audio   = document.getElementById('bgAudio');
+const btnMute = document.getElementById('btnMute');
+let audioStarted = false;
+
+function startAudio() {
+  if (audioStarted) return;
+  audioStarted = true;
+  audio.volume = 0.4;
+  audio.play().catch(() => {}); // silencieux si bloqué
+}
+
+btnMute.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play().catch(() => {});
+    btnMute.textContent = '🔊';
+  } else {
+    audio.pause();
+    btnMute.textContent = '🔇';
+  }
+});
+
+// Démarrer au premier clic "C'est parti"
+document.getElementById('btnStart').addEventListener('click', () => {
+  startAudio();
+  startQuiz();
+});
+
+// (on retire l'ancien listener simple sur btnStart)
+
 btnNext.addEventListener('click', nextQuestion);
 btnBack.addEventListener('click', prevQuestion);
 document.getElementById('btnRestart').addEventListener('click', restart);
@@ -97,14 +125,11 @@ function computeScore() {
   }, 0);
 }
 
-function computeMaxScore() {
-  return questions.reduce((sum, q) => sum + Math.max(...q.options.map(o => o.points)), 0);
-}
-
-function getProfile(score, maxScore) {
-  const pct = maxScore === 0 ? 50 : (score / maxScore) * 100;
-  if (pct <= thresholds.low)  return 'TIGER';
-  if (pct >= thresholds.high) return 'GALAXY';
+// Profil selon le score brut (négatif → tigre, positif → galactique)
+// Les seuils dans data.js sont des valeurs absolues de points.
+function getProfile(score) {
+  if (score <= thresholds.low)  return 'TIGER';
+  if (score >= thresholds.high) return 'GALAXY';
   return 'HYBRID';
 }
 
@@ -112,10 +137,9 @@ function getProfile(score, maxScore) {
 // RÉSULTAT
 // -------------------------------------------------------
 function showResult() {
-  const score    = computeScore();
-  const maxScore = computeMaxScore();
-  const key      = getProfile(score, maxScore);
-  const r        = results[key];
+  const score = computeScore();
+  const key   = getProfile(score);
+  const r     = results[key];
 
   questionCard.classList.add('hidden');
   progressSection.classList.add('hidden');
@@ -133,50 +157,10 @@ function showResult() {
   document.body.classList.remove('bg-tiger', 'bg-galaxy', 'bg-hybrid');
   document.body.classList.add(r.bg);
 
-  // Pill avec animation du score
-  const pillsEl = document.getElementById('scorePills');
-  pillsEl.innerHTML = '';
-  const pill = document.createElement('div');
-  pill.className   = 'pill';
-  pill.style.color = r.color;
-  pill.textContent = `Score : 0 / ${maxScore}`;
-  pillsEl.appendChild(pill);
-  animateScore(pill, score, maxScore, r.color);
-
   // Bouton partage
   btnShare.style.borderColor = r.color;
   btnShare.style.color       = r.color;
-
-  // Stocke le résultat courant pour le partage
-  btnShare.dataset.key   = key;
-  btnShare.dataset.score = score;
-  btnShare.dataset.max   = maxScore;
-}
-
-// -------------------------------------------------------
-// ANIMATION DU SCORE
-// -------------------------------------------------------
-function animateScore(pill, targetScore, maxScore, color) {
-  const duration = 1200; // ms
-  const start    = performance.now();
-
-  function step(now) {
-    const elapsed  = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    // Easing ease-out
-    const eased    = 1 - Math.pow(1 - progress, 3);
-    const current  = Math.round(eased * targetScore);
-
-    pill.textContent = `Score : ${current} / ${maxScore}`;
-
-    // Couleur qui s'intensifie pendant l'animation
-    pill.style.opacity = 0.4 + eased * 0.6;
-
-    if (progress < 1) requestAnimationFrame(step);
-    else pill.style.opacity = 1;
-  }
-
-  requestAnimationFrame(step);
+  btnShare.dataset.key       = key;
 }
 
 // -------------------------------------------------------
@@ -184,26 +168,20 @@ function animateScore(pill, targetScore, maxScore, color) {
 // -------------------------------------------------------
 async function shareResult() {
   const key      = btnShare.dataset.key;
-  const score    = btnShare.dataset.score;
-  const max      = btnShare.dataset.max;
   const r        = results[key];
-  const shareUrl = window.location.href.split('?')[0]; // URL propre sans paramètres
+  const shareUrl = window.location.href.split('?')[0];
 
-  const text = `${r.emoji} Je suis "${r.title}" ! (${score}/${max} pts)\nFais le quiz : ${shareUrl}`;
+  const text = `${r.emoji} Je suis "${r.title}" !\nFais le quiz : ${shareUrl}`;
 
-  // Utilise l'API Web Share si disponible (mobile), sinon copie dans le presse-papier
   if (navigator.share) {
     try {
       await navigator.share({ title: 'Tigre ou Galactique ?', text });
-    } catch {
-      // L'utilisateur a annulé — on ne fait rien
-    }
+    } catch { /* annulé */ }
   } else {
     try {
       await navigator.clipboard.writeText(text);
       showShareFeedback('✅ Copié !');
     } catch {
-      // Fallback si clipboard non disponible (ex: http sans https)
       showShareFeedback('🔗 ' + shareUrl);
     }
   }

@@ -8,13 +8,11 @@
 </head>
 <body>
 
-  <!-- Lianes décoratives -->
-  <div class="leaf-deco tl"    aria-hidden="true">🌿</div>
-  <div class="leaf-deco tr"    aria-hidden="true">🌿</div>
-  <div class="leaf-deco bl"    aria-hidden="true">🍃</div>
-  <div class="leaf-deco br"    aria-hidden="true">🌿</div>
-  <div class="leaf-deco mid-l" aria-hidden="true">🍃</div>
-  <div class="leaf-deco mid-r" aria-hidden="true">🌿</div>
+  <!-- Fond sonore -->
+  <audio id="bgAudio" src="audio.mp3" loop preload="auto"></audio>
+  <button class="btn-mute" id="btnMute" title="Couper le son">🔊</button>
+
+  <canvas id="bg-canvas"></canvas>
 
   <div class="wrapper">
 
@@ -55,7 +53,6 @@
       <span class="result-emoji" id="resultEmoji"></span>
       <div class="result-title" id="resultTitle"></div>
       <div class="result-desc" id="resultDesc"></div>
-      <div class="score-pills" id="scorePills"></div>
       <div class="result-actions">
         <button class="btn-share" id="btnShare">Partager mon résultat 🔗</button>
         <button class="btn-restart" id="btnRestart">Recommencer 🔄</button>
@@ -65,6 +62,7 @@
   </div>
 
   <!-- data.js doit être chargé AVANT script.js -->
+  <script src="background.js"></script>
   <script src="data.js"></script>
   <script src="script.js"></script>
 </body>

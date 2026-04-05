@@ -34,82 +34,34 @@ body {
   position: relative;
 }
 
-/* Fond étoilé animé */
-body::before {
-  content: '';
+/* Canvas de fond animé */
+#bg-canvas {
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(ellipse at 20% 10%, #7b2fff44 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, #ff6b1a33 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, #00d4ff11 0%, transparent 60%);
   z-index: 0;
   pointer-events: none;
-  animation: bgPulse 8s ease-in-out infinite alternate;
 }
 
-@keyframes bgPulse {
-  from { opacity: 0.8; }
-  to   { opacity: 1; }
-}
-
-/* Étoiles générées en CSS */
-body::after {
-  content: '';
+/* ---- BOUTON MUTE ---- */
+.btn-mute {
   position: fixed;
-  inset: 0;
-  background-image:
-    radial-gradient(1px 1px at 10% 15%, #fff 100%, transparent),
-    radial-gradient(1px 1px at 25% 40%, #fff 100%, transparent),
-    radial-gradient(1.5px 1.5px at 40% 8%,  #fff 100%, transparent),
-    radial-gradient(1px 1px at 55% 60%, #fff 100%, transparent),
-    radial-gradient(1px 1px at 70% 25%, #fff 100%, transparent),
-    radial-gradient(1.5px 1.5px at 80% 50%, #fff 100%, transparent),
-    radial-gradient(1px 1px at 90% 75%, #fff 100%, transparent),
-    radial-gradient(1px 1px at 15% 80%, #fff 100%, transparent),
-    radial-gradient(1px 1px at 60% 90%, #fff 100%, transparent),
-    radial-gradient(2px 2px at 35% 70%, #ffffffaa 100%, transparent),
-    radial-gradient(1px 1px at 88% 12%, #fff 100%, transparent),
-    radial-gradient(1px 1px at 5%  55%, #fff 100%, transparent),
-    radial-gradient(1.5px 1.5px at 75% 95%, #fff 100%, transparent),
-    radial-gradient(1px 1px at 48% 33%, #ffffffcc 100%, transparent),
-    radial-gradient(1px 1px at 92% 42%, #fff 100%, transparent),
-    radial-gradient(2px 2px at 18% 62%, #ffffffaa 100%, transparent),
-    radial-gradient(1px 1px at 66% 18%, #fff 100%, transparent),
-    radial-gradient(1px 1px at 30% 88%, #fff 100%, transparent);
-  opacity: 0.6;
-  z-index: 0;
-  pointer-events: none;
-  animation: twinkle 5s ease-in-out infinite alternate;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background .18s, transform .18s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-@keyframes twinkle {
-  from { opacity: 0.4; }
-  to   { opacity: 0.9; }
-}
-
-/* Lianes / feuilles décoratives */
-.leaf-deco {
-  position: fixed;
-  pointer-events: none;
-  z-index: 1;
-  font-size: 3.5rem;
-  opacity: 0.18;
-  filter: blur(1px);
-  animation: sway 6s ease-in-out infinite alternate;
-  user-select: none;
-}
-.leaf-deco.tl { top: -10px; left: -10px; transform: rotate(-20deg); font-size: 5rem; }
-.leaf-deco.tr { top: -10px; right: -10px; transform: rotate(25deg) scaleX(-1); font-size: 4.5rem; }
-.leaf-deco.bl { bottom: 0; left: -10px; transform: rotate(10deg); font-size: 4rem; }
-.leaf-deco.br { bottom: 0; right: -10px; transform: rotate(-15deg) scaleX(-1); font-size: 5rem; }
-.leaf-deco.mid-l { top: 45%; left: -15px; transform: rotate(-5deg); font-size: 3rem; }
-.leaf-deco.mid-r { top: 40%; right: -15px; transform: rotate(8deg) scaleX(-1); font-size: 3rem; }
-
-@keyframes sway {
-  from { transform: rotate(-20deg) translateY(0); }
-  to   { transform: rotate(-14deg) translateY(-12px); }
-}
+.btn-mute:hover { background: rgba(0,0,0,0.6); transform: scale(1.1); }
 
 /* ---- WRAPPER ---- */
 .wrapper {
@@ -330,45 +282,22 @@ body::after {
   line-height: 1.7;
 }
 
-/* ---- RESULT CARD ---- */
+/* ---- RESULT CARD — texte flottant, pas d'encadré ---- */
 .result-card {
-  border-radius: var(--radius);
-  padding: 44px 32px;
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 44px 24px;
   text-align: center;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 12px 60px #00000077;
   animation: popIn .65s cubic-bezier(.34,1.56,.64,1) both;
-  position: relative;
-  overflow: hidden;
 }
-
-/* Halo de couleur derrière le résultat */
-.result-card::before {
-  content: '';
-  position: absolute;
-  inset: -40%;
-  border-radius: 50%;
-  opacity: 0.18;
-  filter: blur(60px);
-  z-index: 0;
-  animation: haloPulse 3s ease-in-out infinite alternate;
-}
-
-@keyframes haloPulse {
-  from { transform: scale(1);    opacity: 0.15; }
-  to   { transform: scale(1.15); opacity: 0.25; }
-}
-
-.result-card > * { position: relative; z-index: 1; }
 
 .result-emoji {
-  font-size: 80px;
+  font-size: 88px;
   display: block;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   animation: bounceIn .8s cubic-bezier(.34,1.56,.64,1) both;
-  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 4px 24px rgba(0,0,0,0.7));
 }
 
 @keyframes bounceIn {
@@ -378,39 +307,23 @@ body::after {
 
 .result-title {
   font-family: 'Boogaloo', cursive;
-  font-size: 2.5rem;
-  letter-spacing: .04em;
-  margin-bottom: 14px;
+  font-size: 3rem;
+  letter-spacing: .05em;
+  margin-bottom: 16px;
   line-height: 1.1;
-  filter: drop-shadow(0 0 20px currentColor);
+  text-shadow: 0 2px 24px rgba(0,0,0,0.8), 0 0 40px currentColor;
 }
 
 .result-desc {
-  font-size: 1rem;
-  line-height: 1.75;
-  color: #ccc8e8;
-  font-weight: 500;
-  margin-bottom: 32px;
-  max-width: 480px;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #f0ede6;
+  font-weight: 600;
+  margin-bottom: 40px;
+  max-width: 460px;
   margin-left: auto;
   margin-right: auto;
-}
-
-.score-pills {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 30px;
-}
-
-.pill {
-  padding: 7px 18px;
-  border-radius: 99px;
-  font-size: .85rem;
-  font-weight: 700;
-  letter-spacing: .04em;
-  border: 1.5px solid currentColor;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.9), 0 2px 20px rgba(0,0,0,0.7);
 }
 
 .result-actions {
@@ -424,7 +337,8 @@ body::after {
   padding: 13px 32px;
   border: 2px solid;
   border-radius: 12px;
-  background: transparent;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
   font-family: 'Boogaloo', cursive;
   font-size: 1.1rem;
   letter-spacing: .03em;
@@ -434,45 +348,26 @@ body::after {
   max-width: 320px;
 }
 
-.btn-share:hover    { transform: translateY(-2px); background: rgba(255,255,255,0.07); }
+.btn-share:hover    { transform: translateY(-2px); background: rgba(0,0,0,0.55); }
 .btn-share:disabled { opacity: .6; cursor: default; transform: none; }
 
 .btn-restart {
   padding: 11px 28px;
-  border: none;
+  border: 2px solid rgba(255,255,255,0.25);
   border-radius: 12px;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
   font-family: 'Boogaloo', cursive;
-  font-size: 1.15rem;
-  letter-spacing: .04em;
-  color: var(--dark);
+  font-size: 1.05rem;
+  letter-spacing: .03em;
+  color: rgba(255,255,255,0.75);
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-  transition: transform .18s, box-shadow .18s;
+  transition: transform .18s, background .18s;
+  width: 100%;
+  max-width: 320px;
 }
 
-.btn-restart:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 8px 30px rgba(0,0,0,0.5); }
-
-/* Thèmes par profil */
-.result-card.theme-tiger {
-  background: linear-gradient(145deg, rgba(30,12,0,0.92), rgba(20,8,0,0.88));
-  border-color: rgba(255,107,26,0.3);
-}
-.result-card.theme-tiger::before  { background: radial-gradient(circle, var(--tiger), var(--tiger2)); }
-.result-card.theme-tiger .btn-restart { background: linear-gradient(135deg, var(--tiger), var(--tiger2)); }
-
-.result-card.theme-galaxy {
-  background: linear-gradient(145deg, rgba(8,4,28,0.92), rgba(4,8,30,0.88));
-  border-color: rgba(123,47,255,0.3);
-}
-.result-card.theme-galaxy::before  { background: radial-gradient(circle, var(--galaxy), var(--galaxy2)); }
-.result-card.theme-galaxy .btn-restart { background: linear-gradient(135deg, var(--galaxy), var(--galaxy2)); color: white; }
-
-.result-card.theme-hybrid {
-  background: linear-gradient(145deg, rgba(0,20,12,0.92), rgba(10,8,0,0.88));
-  border-color: rgba(0,255,136,0.3);
-}
-.result-card.theme-hybrid::before  { background: radial-gradient(circle, var(--hybrid), var(--hybrid2)); }
-.result-card.theme-hybrid .btn-restart { background: linear-gradient(135deg, var(--hybrid), var(--hybrid2)); }
+.btn-restart:hover { transform: translateY(-2px); background: rgba(0,0,0,0.55); color: white; }
 
 /* ---- ANIMATIONS ---- */
 @keyframes popIn {
@@ -486,22 +381,45 @@ body::after {
 }
 
 /* ---- FONDS RÉSULTATS (page entière) ---- */
+/* Cache le canvas animé et affiche l'image de fond */
+body.bg-tiger   #bg-canvas,
+body.bg-galaxy  #bg-canvas,
+body.bg-hybrid  #bg-canvas { display: none; }
+
+body.bg-tiger {
+  background: url('tiger.png') center 30% / cover no-repeat fixed;
+}
 body.bg-tiger::before {
-  background:
-    linear-gradient(to bottom, rgba(10,10,26,0.38) 0%, rgba(10,10,26,0.55) 100%),
-    url('tiger.png') center 30% / cover no-repeat fixed;
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(10,10,26,0.30) 0%, rgba(10,10,26,0.50) 100%);
+  z-index: 0;
+  pointer-events: none;
 }
 
+body.bg-galaxy {
+  background: url('galaxy.jpg') center center / cover no-repeat fixed;
+}
 body.bg-galaxy::before {
-  background:
-    linear-gradient(to bottom, rgba(4,8,30,0.35) 0%, rgba(4,8,30,0.52) 100%),
-    url('galaxy.jpg') center center / cover no-repeat fixed;
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(4,8,30,0.28) 0%, rgba(4,8,30,0.45) 100%);
+  z-index: 0;
+  pointer-events: none;
 }
 
+body.bg-hybrid {
+  background: url('hybrid.jpg') center center / cover no-repeat fixed;
+}
 body.bg-hybrid::before {
-  background:
-    linear-gradient(to bottom, rgba(0,10,6,0.38) 0%, rgba(0,10,6,0.55) 100%),
-    url('hybrid.jpg') center center / cover no-repeat fixed;
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,10,6,0.28) 0%, rgba(0,10,6,0.45) 100%);
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* ---- HIDDEN ---- */
