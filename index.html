@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quel type es-tu ? 🔥</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- INTRO (header) -->
+  <div class="header" id="introHeader">
+    <span class="emoji-big">🌈</span>
+    <h1>Quel type es-tu ?</h1>
+    <p>7 questions pour le savoir — honnêteté obligatoire 😄</p>
+  </div>
+
+  <!-- PROGRESS -->
+  <div id="progressSection" class="hidden">
+    <div class="progress-label" id="progressLabel">Question 1 / 7</div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="progressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- QUESTION CARD -->
+  <div class="card hidden" id="questionCard">
+    <div class="question-number" id="questionNumber">Question 1</div>
+    <div class="question-text" id="questionText"></div>
+    <div class="options" id="optionsContainer"></div>
+    <div class="nav">
+      <button class="btn-back" id="btnBack">← Retour</button>
+      <button class="btn-next" id="btnNext" disabled>Suivant →</button>
+    </div>
+  </div>
+
+  <!-- START CARD -->
+  <div class="card" id="startCard">
+    <p style="font-size:1.1rem;font-weight:700;color:#555;margin-bottom:20px;line-height:1.6">
+      Prêt·e à découvrir ton profil ? Réponds sincèrement et on te dit tout ! 🎉
+    </p>
+    <button class="btn-next" id="btnStart" style="max-width:100%;width:100%">C'est parti ! 🚀</button>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result-card hidden" id="resultCard">
+    <span class="result-emoji" id="resultEmoji"></span>
+    <div class="result-title" id="resultTitle"></div>
+    <div class="result-desc" id="resultDesc"></div>
+    <div class="score-pills" id="scorePills"></div>
+    <button class="btn-restart" id="btnRestart">Recommencer 🔄</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
