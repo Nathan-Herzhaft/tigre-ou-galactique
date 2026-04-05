@@ -10,59 +10,116 @@
 // -------------------------------------------------------
 const questions = [
   {
-    text: "C'est samedi matin, tu fais quoi ?",
+    text: "Mon jeu vidéo préféré d'enfance ?",
     options: [
-      { label: "Grasse mat' jusqu'à midi, évidemment 😴", points: 0 },
-      { label: "Déjà dehors pour une balade ou du sport 🏃", points: 2 },
-      { label: "Un projet créa ou lecture tranquille ☕", points: 1 },
+      { label: "Pokemon Platine", points: -1 },
+      { label: "Super Mario Galaxy", points: 2 },
+      { label: "Le programme d'entraînement cérébral du Docteur Kawashima", points: 1 },
+      { label: "GTA (sur DS)", points: -1},
     ]
   },
   {
-    text: "En soirée, tu es plutôt…",
+    text: "Ma suite de résultats préférée au triman (sachant que je ne suis pas triman) ?",
     options: [
-      { label: "Celui/celle qui danse toute la nuit 🕺", points: 3 },
-      { label: "Dans un coin à parler avec 2-3 personnes 🗣️", points: 1 },
-      { label: "Rentré·e à minuit, le lit m'appelle 🛌", points: 0 },
+      { label: "3-1, 5-5, 5-2", points: 3 },
+      { label: "4-2 (sec)", points: -3 },
+      { label: "3-3, 3-3, 4-2", points: -1 },
+      { label: "1-1 (bus par politesse), 2-1, 5-1", points: 0 },
+      { label: "2-1, 4-1", points: 1}
     ]
   },
   {
-    text: "Ton repas idéal ?",
+    text: "Ma suite de résultats préférée au triman (sachant que je suis triman) ?",
     options: [
-      { label: "Un bon plat fait maison, en prenant le temps 🍝", points: 1 },
-      { label: "Un kebab entre amis à 2h du mat' 🌯", points: 3 },
-      { label: "N'importe quoi du moment que c'est rapide 😅", points: 0 },
+      { label: "3-1, 5-5, 5-2", points: 2 },
+      { label: "4-2 (sec)", points: -2 },
+      { label: "3-3, 3-3, 4-2", points: -3 },
+      { label: "1-1 (bus par politesse), 2-1, 5-1", points: 1 },
+      { label: "2-1, 4-1", points: 1}
+    ]
+  },
+    {
+    text: "A l'école des sorciers, je suis dans la maison…",
+    options: [
+      { label: "Gryffondor", points: -1 },
+      { label: "Serdaigle", points: 3 },
+      { label: "Poufsouffle", points: -3 },
+      { label: "Serpentard", points: 1 },
+    ]
+  },
+    {
+    text: "Mon superpouvoir idéal ?",
+    options: [
+      { label: "Se téléporter", points: 1 },
+      { label: "Lire dans les pensées", points: 3 },
+      { label: "Courir très très vite", points: -2 },
     ]
   },
   {
-    text: "Un truc se casse chez toi. Tu…",
+    text: "Mon Genin préféré dans Naruto ?",
     options: [
-      { label: "Cherches un tuto YouTube et tu répares 🔧", points: 2 },
-      { label: "Demandes à quelqu'un de le faire à ta place 😇", points: 0 },
-      { label: "Improvises jusqu'à ce que ça marche (ou pas) 🤞", points: 3 },
+      { label: "Naruto", points: -2 },
+      { label: "Sasuke", points: 2 },
+      { label: "Shikamaru", points: 1 },
+      { label: "Kiba", points: -1 },
+      { label: "Gaara", points: 0 },
     ]
   },
   {
-    text: "Quelle phrase te ressemble le plus ?",
+    text: "Mon plat préféré, au déjeuner avant de reprendre les cours de l'après-midi ?",
     options: [
-      { label: "\"Je verrai ça demain\" 😌", points: 0 },
-      { label: "\"Carpe diem, on y va !\" ⚡", points: 3 },
-      { label: "\"Laisse-moi d'abord faire une liste\" 📋", points: 1 },
+      { label: "Une pizza chèvre-miel", points: 1 },
+      { label: "Du pouler", points: -1 },
+      { label: "Un tupperware gnoochi épinards, préparé la veille", points: 2 },
+      { label: "Un panini", points: 0 },
     ]
   },
   {
-    text: "Tu reçois un message inattendu d'un inconnu. Tu…",
+    text: "Mon style de jeu sur un terrain de foot ?",
     options: [
-      { label: "Réponds avec enthousiasme, nouvelle aventure ! 🎉", points: 3 },
-      { label: "Lis, marques comme non lu, réponds dans 3 jours 👀", points: 0 },
-      { label: "Analyses le message avant de répondre prudemment 🧐", points: 1 },
+      { label: "Je fais un pressing étouffant tah Dembele", points: 3 },
+      { label: "Je n'arrive pas à passer la défense donc je tente un frappe de loin (qui échoue)", points: -3 },
+      { label: "Je me blesse", points: -1 },
+      { label: "J'attends devant les cages adverses qu'un ballon arrive dans mes pieds", points: 2 },
     ]
   },
   {
-    text: "Ton superpouvoir idéal ?",
+    text: "Dans un Fallen Kingdom, durant la phase préparatoire…",
     options: [
-      { label: "Téléportation — bye bye les transports 🚀", points: 3 },
-      { label: "Lire dans les pensées 🧠", points: 1 },
-      { label: "Ne jamais avoir besoin de dormir... ou l'inverse 😴", points: 0 },
+      { label: "Je mine indéfiniment jusqu'à ce que ma team entière soit full diamant", points: 3 },
+      { label: "Je chasse du pouler", points: -1 },
+      { label: "Je regarde un tuto pour crafter une épée en bois", points: 1 },
+      { label: "Je prépare des pièges avec de la lave et je meure dedans", points: -2 },
+      { label: "Je triche", points: 2}
+    ]
+  },
+  {
+    text: "En normal game sur LoL…",
+    options: [
+      { label: "Je joue Xerath mid et je tire de loin", points: 2 },
+      { label: "Je joue un duo bot Xayah-Rakan en mode no homo", points: -1 },
+      { label: "Je joue Tryndamere et ma team ne me voit pas avant que je sois level 16", points: 0 },
+      { label: "Je joue Nunu", points: -2 },
+      { label: "Je random pick", points: -2}
+    ]
+  },
+  {
+    text: "Dans mon groupe de musique je joue…",
+    options: [
+      { label: "De la guitare éléctrique", points: -1 },
+      { label: "Du saxophone", points: -1 },
+      { label: "Du piano", points: 1 },
+      { label: "Je chante", points: 1 },
+      { label: "Je chante (moyennement bien, mais je ne sais rien faire d'autre)", points: 0}
+    ]
+  },
+  {
+    text: "Mon serveur préféré au café des Halles…",
+    options: [
+      { label: "Dom", points: 0 },
+      { label: "Le grand qui nous sert des shots dans des tubes à essai", points: 0 },
+      { label: "La meuf qui a lavé le vomi de Dono", points: 0 },
+      { label: "La meuf qui est restée que un jour, qui a souri à Nathan et Seb a tout gâché", points: 0 },
     ]
   },
 ];
