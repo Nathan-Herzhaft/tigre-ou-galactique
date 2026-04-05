@@ -137,9 +137,9 @@ function getProfile(score) {
 // RÉSULTAT
 // -------------------------------------------------------
 function scoreLabel(score, key) {
-  const MEAN = 3; // moyenne simulée arrondie
+  const MEAN = 2; // moyenne simulée arrondie
   const relative = Math.abs(score - MEAN);
-  if (key === 'HYBRID') return `Score : ${score > 0 ? '+' : ''}${score}`;
+  if (key === 'HYBRID') return `Neutre`;
   const side = key === 'TIGER' ? 'points tigre 🐯' : 'points galactique 🌌';
   return `${relative} ${side}`;
 }
