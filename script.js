@@ -137,7 +137,7 @@ function getProfile(score) {
 // RÉSULTAT
 // -------------------------------------------------------
 function scoreLabel(score, key) {
-  if (key === 'HYBRID') return '';
+  if (key === 'HYBRID') return 'très peu de points';
   if (key === 'TIGER') {
     const pts = Math.abs(score - thresholds.low);
     return `${pts} point${pts > 1 ? 's' : ''} tigre 🐯`;
