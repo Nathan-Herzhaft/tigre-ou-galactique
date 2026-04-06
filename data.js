@@ -44,7 +44,7 @@ const questions = [
       { label: "Gryffondor", points: -1 },
       { label: "Serpentard", points: 1 },
       { label: "Serdaigle", points: 3 },
-      { label: "Poufsouffle", points: -3 },
+      { label: "Poufsouffle", points: -2 },
     ]
   },
     {
