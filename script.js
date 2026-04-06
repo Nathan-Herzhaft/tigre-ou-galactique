@@ -137,11 +137,13 @@ function getProfile(score) {
 // RÉSULTAT
 // -------------------------------------------------------
 function scoreLabel(score, key) {
-  const MEAN = 2; // moyenne simulée arrondie
-  const relative = Math.abs(score - MEAN);
-  if (key === 'HYBRID') return `Neutre`;
-  const side = key === 'TIGER' ? 'points tigre 🐯' : 'points galactique 🌌';
-  return `${relative} ${side}`;
+  if (key === 'HYBRID') return '';
+  if (key === 'TIGER') {
+    const pts = Math.abs(score - thresholds.low);
+    return `${pts} point${pts > 1 ? 's' : ''} tigre 🐯`;
+  }
+  const pts = Math.abs(score - thresholds.high);
+  return `${pts} point${pts > 1 ? 's' : ''} galactique 🌌`;
 }
 
 function showResult() {
@@ -163,8 +165,10 @@ function showResult() {
 
   // Affichage du score
   const label = scoreLabel(score, key);
-  document.getElementById('resultScore').textContent = label;
-  document.getElementById('resultScore').style.color = r.color;
+  const scoreEl = document.getElementById('resultScore');
+  scoreEl.textContent = label;
+  scoreEl.style.color = r.color;
+  scoreEl.style.display = label ? 'block' : 'none';
 
   // Fond pleine page
   document.body.classList.remove('bg-tiger', 'bg-galaxy', 'bg-hybrid');

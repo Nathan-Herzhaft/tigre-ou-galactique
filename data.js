@@ -169,8 +169,8 @@ const questions = [
 // Ajuste low et high selon la plage possible de tes questions.
 // -------------------------------------------------------
 const thresholds = {
-  low:  1, // score <= low  → Tigre
-  high:  3, // score >= high → Galactique
+  low:  0, // score <= low  → Tigre
+  high:  4, // score >= high → Galactique
 };
  
 // -------------------------------------------------------
@@ -184,10 +184,9 @@ const thresholds = {
 // -------------------------------------------------------
 const results = {
   TIGER: {
-
     emoji: "🐯 ",
     title: "TIGRE",
-    desc:  "Bienvenue chez les tigres. Sois fier et rugis, fais trembler la jungle autour de toi. Tu es quelqu'un d'audacieux, tu agis à l'instinct et ça ne marche pas toujours. On peut compter sur toi pour le divertissement, moins pour l'efficacité en toute situation. 🔥",
+    desc:  "Bienvenue chez les tigres. Sois fier et rugis, fais trembler la jungle autour de toi. Tu es quelqu'un d'audacieux, tu agis à l'instinct et ça marche rarement. On peut compter sur toi pour le divertissement, moins pour l'efficacité en toute situation. 🔥",
     color: "#ff6b1a",
     theme: "theme-tiger",
     bg:    "bg-tiger",
