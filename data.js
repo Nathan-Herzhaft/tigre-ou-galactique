@@ -42,7 +42,7 @@ const questions = [
     text: "A l'école des sorciers, je suis dans la maison…",
     options: [
       { label: "Gryffondor", points: -1 },
-      { label: "Serpentard", points: 1 },
+      { label: "Serpentard", points: 2 },
       { label: "Serdaigle", points: 3 },
       { label: "Poufsouffle", points: -2 },
     ]
@@ -52,16 +52,16 @@ const questions = [
     options: [
       { label: "Se téléporter", points: 1 },
       { label: "Cracher du feu", points: -2 },
-      { label: "Lire dans les pensées", points: 2 },
+      { label: "Lire dans les pensées", points: 3 },
       { label: "Super vitesse", points: -1}
     ]
   },
   {
     text: "En khôlle de maths... ?",
     options: [
-      { label: "J'arrive sans connaître le cours", points: -1 },
+      { label: "J'arrive sans connaître le cours", points: 0 },
       { label: "Je plie un classique, comme d'habitude", points: 0 },
-      { label: "Je tente d'arnaquer le colleur (la supercherie ne fonctionne pas, il me met 10)", points: -2 },
+      { label: "Je tente d'arnaquer le colleur (la supercherie ne fonctionne pas, il me met 10)", points: -1 },
       { label: "Je réussi l'exo sans faire exprès et prends mon 18 (je n'ai rien compris)", points: 1 },
       { label: "Je gaze la salle", points: -1 },
     ]
@@ -90,7 +90,7 @@ const questions = [
     options: [
       { label: "Le pichet de blonde de Dom", points: 0 },
       { label: "La delirium du pop simoké", points: -1 },
-      { label: "Un coca bien frais chacal", points: 1 },
+      { label: "Un coca bien frais chacal", points: 2 },
       { label: "Je préfère rentrer chez moi", points: 3 },
     ]
   },
@@ -170,7 +170,7 @@ const questions = [
 // -------------------------------------------------------
 const thresholds = {
   low:  0, // score <= low  → Tigre
-  high:  4, // score >= high → Galactique
+  high:  3, // score >= high → Galactique
 };
  
 // -------------------------------------------------------
