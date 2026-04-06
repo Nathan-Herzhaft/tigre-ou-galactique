@@ -21,7 +21,7 @@ const questions = [
   {
     text: "Ma suite de résultats préférée au triman (sachant que je ne suis pas triman) ?",
     options: [
-      { label: "3-1, 5-5, 5-2", points: 3 },
+      { label: "3-1, 5-5, 5-2", points: 2 },
       { label: "4-2 (sec)", points: -3 },
       { label: "3-3, 3-3, 4-2", points: -1 },
       { label: "1-1 (bus par politesse), 2-1, 5-1", points: 1 },
@@ -35,7 +35,7 @@ const questions = [
       { label: "4-2 (sec)", points: 0 },
       { label: "3-3, 3-3, 4-2", points: -2 },
       { label: "1-1 (bus par politesse), 2-1, 5-1", points: 1 },
-      { label: "2-1, 4-1", points: 2}
+      { label: "2-1, 4-1", points: 3}
     ]
   },
     {
