@@ -33,7 +33,7 @@ const questions = [
     options: [
       { label: "3-1, 5-5, 5-2", points: 2 },
       { label: "4-2 (sec)", points: 0 },
-      { label: "3-3, 3-3, 4-2", points: -3 },
+      { label: "3-3, 3-3, 4-2", points: -2 },
       { label: "1-1 (bus par politesse), 2-1, 5-1", points: 1 },
       { label: "2-1, 4-1", points: 2}
     ]
@@ -109,7 +109,7 @@ const questions = [
       { label: "Je mine indéfiniment jusqu'à ce que ma team entière soit full diamant", points: 3 },
       { label: "Je chasse du pouler", points: -1 },
       { label: "Je regarde un tuto pour crafter une épée en bois", points: 2 },
-      { label: "Je prépare des pièges avec de la lave et je meure dedans", points: -2 },
+      { label: "Je prépare des pièges avec de la lave et je meure dedans", points: -1 },
       { label: "Je triche", points: 2}
     ]
   },
