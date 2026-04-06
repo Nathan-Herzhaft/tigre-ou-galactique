@@ -169,8 +169,8 @@ const questions = [
 // Ajuste low et high selon la plage possible de tes questions.
 // -------------------------------------------------------
 const thresholds = {
-  low:  0, // score <= low  → Tigre
-  high:  3, // score >= high → Galactique
+  low:  0, // score < low  → Tigre
+  high:  2, // score > high → Galactique
 };
  
 // -------------------------------------------------------

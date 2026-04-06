@@ -128,8 +128,8 @@ function computeScore() {
 // Profil selon le score brut (négatif → tigre, positif → galactique)
 // Les seuils dans data.js sont des valeurs absolues de points.
 function getProfile(score) {
-  if (score <= thresholds.low)  return 'TIGER';
-  if (score >= thresholds.high) return 'GALAXY';
+  if (score < thresholds.low)  return 'TIGER';
+  if (score > thresholds.high) return 'GALAXY';
   return 'HYBRID';
 }
 
