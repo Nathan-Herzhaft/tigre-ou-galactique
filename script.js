@@ -3,7 +3,7 @@
 // Les données (questions, résultats, seuils) sont dans data.js
 // =====================================================
 
-const letters = ['A', 'B', 'C', 'D', 'E'];
+const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
 
 let currentQ = 0;
 let answers  = []; // index de l'option choisie par question

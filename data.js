@@ -15,27 +15,29 @@ const questions = [
       { label: "Pokemon Platine", points: -1 },
       { label: "Super Mario Galaxy", points: 2 },
       { label: "Le programme d'entraînement cérébral du Docteur Kawashima", points: 2 },
-      { label: "GTA (sur DS)", points: -1},
+      { label: "GTA (sur DS)", points: -2},
     ]
   },
   {
     text: "Ma suite de résultats préférée au triman (sachant que je ne suis pas triman) ?",
     options: [
-      { label: "3-1, 5-5, 5-2", points: 2 },
+      { label: "2-1, 4-1", points: 2 },
       { label: "4-2 (sec)", points: -3 },
       { label: "3-3, 3-3, 4-2", points: -1 },
       { label: "1-1 (bus par politesse), 2-1, 5-1", points: 1 },
-      { label: "2-1, 4-1", points: 2}
+      { label: "3-1, 5-5, 5-2", points: 2 },
+      { label: "Je ne connais pas assez les règles du triman pour répondre", points: 1}
     ]
   },
   {
     text: "Ma suite de résultats préférée au triman (sachant que je suis triman) ?",
     options: [
-      { label: "3-1, 5-5, 5-2", points: 2 },
+      { label: "2-1, 4-1", points: 2 },
       { label: "4-2 (sec)", points: 0 },
       { label: "3-3, 3-3, 4-2", points: -2 },
       { label: "1-1 (bus par politesse), 2-1, 5-1", points: 1 },
-      { label: "2-1, 4-1", points: 3}
+      { label: "3-1, 5-5, 5-2", points: 2 },
+      { label: "Je ne connais pas assez les règles du triman pour répondre", points: 1}
     ]
   },
     {
@@ -90,7 +92,7 @@ const questions = [
     options: [
       { label: "Le pichet de blonde de Dom", points: 0 },
       { label: "La delirium du pop simoké", points: -1 },
-      { label: "Un coca bien frais chacal", points: 2 },
+      { label: "Un coca bien frais chacal", points: 1 },
       { label: "Je préfère rentrer chez moi", points: 3 },
     ]
   },
@@ -110,7 +112,8 @@ const questions = [
       { label: "Je chasse du pouler", points: -1 },
       { label: "Je regarde un tuto pour crafter une épée en bois", points: 2 },
       { label: "Je prépare des pièges avec de la lave et je meure dedans", points: -1 },
-      { label: "Je triche", points: 2}
+      { label: "Je triche", points: 2},
+      { label: "Je ne connais pas assez Minecraft pour répondre", points: 1}
     ]
   },
   {
@@ -120,7 +123,8 @@ const questions = [
       { label: "Je joue Xerath mid et je tire de loin", points: 2 },
       { label: "Je joue un duo bot Xayah-Rakan en mode no homo", points: -1 },
       { label: "Je joue Nunu", points: -2 },
-      { label: "Je random pick", points: -2}
+      { label: "Je random pick", points: -2},
+      { label: "Je ne connais pas assez LoL pour répondre", points: 1}
     ]
   },
   {
