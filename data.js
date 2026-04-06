@@ -170,7 +170,7 @@ const questions = [
 // -------------------------------------------------------
 const thresholds = {
   low:  0, // score < low  → Tigre
-  high:  2, // score > high → Galactique
+  high:  1, // score > high → Galactique
 };
  
 // -------------------------------------------------------
